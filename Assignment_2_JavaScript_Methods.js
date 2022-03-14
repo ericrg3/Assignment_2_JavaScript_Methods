@@ -11,18 +11,36 @@ Array.prototype.myEach = function (callbackFn) {
 };
 
 // MAP //
-Array.prototype.myMap = function() {
-
+Array.prototype.myMap = function (callbackFn, _this) {
+    const newArray = []
+    for(let i = 0; i < this.length; i++){
+        newArray.push(
+            callbackFn(_this, this[i], i, this)
+        )
+    }
+    return newArray
 };
 
 // SOME //
-Array.prototype.mySome = function() {
-
+Array.prototype.mySome = function(array, callbackFn) {
+    for(let i = 0; i < array.length; i++){ //arraty is being called
+        if (callbackFn(array[i], i, array)){ //callbackFn returns a true value for at least 1 element in the array, otherwise false. 
+            return true;
+        }
+    }
+    return false;
 };
 
 // REDUCE //
-Array.prototype.myReduce = function() {
+const numbers = [1,2,3,4,5];
+const total = numbers.reduce(callbackFn, Value); //0 is the intial value
 
+Array.prototype.myReduce = function callbackFn(accumulator, Value) {
+    if(accumulator > Value){
+        return accumulator;
+    } else{
+        return Value;
+    }
 };
 
 // INCLUDES //
