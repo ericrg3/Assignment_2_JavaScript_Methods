@@ -14,11 +14,12 @@ Array.prototype.myEach = function (callbackFn) {
 Array.prototype.myMap = function (callbackFn, _this) {
     const newArray = []
     for(let i = 0; i < this.length; i++){
-        newArray.push(
+        newArray.myPush(
             callbackFn(_this, this[i], i, this)
         )
     }
     return newArray
+
 };
 
 // SOME //
@@ -44,13 +45,28 @@ Array.prototype.myReduce = function callbackFn(accumulator, Value) {
 };
 
 // INCLUDES //
-Array.prototype.myIncludes = function() {
-
+Array.prototype.myIncludes = function(searchElement, fromIndex = 0){
+    if(fromIndex < 0){
+     
+        fromIndex = this.length + fromIndex;
+    }
 };
 
-// INDEXOF //
-Array.prototype.myIndexOf = function() {
+// INDEXOF // 
+//IndexOf & LastIndexOf functions are very similar
+Array.prototype.myIndexOf = function(searchElement, fromIndex = 0) {
+    let index = -1; //the first index of the element in the array is -1 if not found.
 
+    if(fromIndex < 0){//value less than 0 is taken as a offset from the end of the array,
+        //if its less than 0 the array is not searched , and returns -1
+        fromIndex = this.length + fromIndex;
+    }
+    for(let i = fromIndex; i < this.length; i++){
+        if(this[i] === searchElement){ //add new element to end this array
+            index = i // stores the index to i
+        }
+    }
+    return index;//returns a new index
 };
 
 // PUSH //
@@ -68,8 +84,21 @@ Array.prototype.myPush = function() {
 };
 
 // LASTINDEXOF //
-Array.prototype.myLastIndexOf = function() {
+//IndexOf & LastIndexOf functions are very similar
+Array.prototype.myLastIndexOf = function(searchElement, fromIndex = this.length - 1) {
+    let index = -1; //the last index of the element in the array. The element can be found in the array,
+    // or -1 if it is not found.
 
+    if(fromIndex < 0){ //value less than 0 is taken as a offset from the end of the array,
+        //if its less than 0 the array is not searched , and returns -1
+        fromIndex = this.length + fromIndex;
+    }
+    for(let i = fromIndex; i >= 0; i--){
+        if(this[i] === searchElement){ //add new element to end this array
+            index = i // stores the index to i
+        }
+    }
+    return index; //returns a new index
 };
 
 // KEYS //
