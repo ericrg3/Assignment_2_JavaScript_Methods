@@ -22,21 +22,32 @@ Array.prototype.myMap = function (callbackFn) {
 
 // SOME //
 Array.prototype.mySome = function(callbackFn) {
-    for(let i = 0; i < array.length; i++){ //array is being called
-        if (callbackFn([i], i, array)){ //callbackFn returns a true value for at least 1 element in the array, otherwise false. 
+    let some = false; 
+    for(let i = 0; i < array.length; i++){
+        if (this[i] === undefined) continue;
+        if (callbackFn(this[i], i, this)){ //callbackFn returns a true value for at least 1 element in the array, otherwise false. 
             return true;
         }
     }
-    return false;
+    return some;
 };
 
 // REDUCE //
-Array.prototype.myReduce = function callbackFn() {
-    if(accumulator > Value){
-        return accumulator;
-    } else{
-        return Value;
+Array.prototype.myReduce = function(callbackFn, value){
+    if(!this.length && initalValue === undefined){
     }
+        let value = initalValue;
+        let index = 0;
+
+        if(initalValue === undefined){
+            initalValue = this[0];
+            index = 1;
+        }
+    
+    for(let i = index; i < this.length; i++){
+        initalValue = callbackFn(initalValue, this[i], i, this)
+        }
+        return initalValue;
 };
 
 // INCLUDES //
@@ -114,8 +125,8 @@ Object.myKeys = function(object) {
 // VALUES //
 Object.myValues = function(object) {
     const valueArr = [];//Empty array
-        for(const valueArr in object){
-            valueArr.push(object[value])
+        for(const value in object){// for each value in object
+            valueArr.push(object[value])// push value to the list
         }
         return valueArr
 };
