@@ -50,7 +50,7 @@ Array.prototype.myIncludes = function(searchElement, fromIndex){
             index = i;
         }
     }
-    return false;//returns false if notthing in the aray
+    return false;//returns false if notthing in the array
 };
 
 // INDEXOF // 
