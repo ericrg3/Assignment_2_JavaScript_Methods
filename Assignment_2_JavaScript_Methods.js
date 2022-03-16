@@ -11,21 +11,19 @@ Array.prototype.myEach = function (callbackFn) {
 };
 
 // MAP //
-Array.prototype.myMap = function (callbackFn, _this) {
+Array.prototype.myMap = function (callbackFn) {
     const newArray = []
     for(let i = 0; i < this.length; i++){
-        newArray.myPush(
-            callbackFn(_this, this[i], i, this)
-        )
+        newArray.myPush(callbackFn(_this, this[i], i, this))
     }
     return newArray
 
 };
 
 // SOME //
-Array.prototype.mySome = function(array, callbackFn) {
-    for(let i = 0; i < array.length; i++){ //arraty is being called
-        if (callbackFn(array[i], i, array)){ //callbackFn returns a true value for at least 1 element in the array, otherwise false. 
+Array.prototype.mySome = function(callbackFn) {
+    for(let i = 0; i < array.length; i++){ //array is being called
+        if (callbackFn([i], i, array)){ //callbackFn returns a true value for at least 1 element in the array, otherwise false. 
             return true;
         }
     }
@@ -33,10 +31,7 @@ Array.prototype.mySome = function(array, callbackFn) {
 };
 
 // REDUCE //
-const numbers = [1,2,3,4,5];
-const total = numbers.reduce(callbackFn, Value); //0 is the intial value
-
-Array.prototype.myReduce = function callbackFn(accumulator, Value) {
+Array.prototype.myReduce = function callbackFn() {
     if(accumulator > Value){
         return accumulator;
     } else{
@@ -45,16 +40,22 @@ Array.prototype.myReduce = function callbackFn(accumulator, Value) {
 };
 
 // INCLUDES //
-Array.prototype.myIncludes = function(searchElement, fromIndex = 0){
-    if(fromIndex < 0){
-     
+Array.prototype.myIncludes = function(searchElement, fromIndex){
+    
+    if(fromIndex < 0){// the number of elements from the end of the array at which to start the search
         fromIndex = this.length + fromIndex;
     }
+    for(let i = fromIndex; i < this.length; i++){
+        if(this[i] === searchElement){// checks value in index
+            index = i;
+        }
+    }
+    return false;//returns false if notthing in the aray
 };
 
 // INDEXOF // 
 //IndexOf & LastIndexOf functions are very similar
-Array.prototype.myIndexOf = function(searchElement, fromIndex = 0) {
+Array.prototype.myIndexOf = function(searchElement, fromIndex) {
     let index = -1; //the first index of the element in the array is -1 if not found.
 
     if(fromIndex < 0){//value less than 0 is taken as a offset from the end of the array,
@@ -62,7 +63,7 @@ Array.prototype.myIndexOf = function(searchElement, fromIndex = 0) {
         fromIndex = this.length + fromIndex;
     }
     for(let i = fromIndex; i < this.length; i++){
-        if(this[i] === searchElement){ //add new element to end this array
+        if(this[i] === searchElement){ //checks value in index
             index = i // stores the index to i
         }
     }
@@ -94,7 +95,7 @@ Array.prototype.myLastIndexOf = function(searchElement, fromIndex = this.length 
         fromIndex = this.length + fromIndex;
     }
     for(let i = fromIndex; i >= 0; i--){
-        if(this[i] === searchElement){ //add new element to end this array
+        if(this[i] === searchElement){ //checks value in index
             index = i // stores the index to i
         }
     }
@@ -102,11 +103,19 @@ Array.prototype.myLastIndexOf = function(searchElement, fromIndex = this.length 
 };
 
 // KEYS //
-Object.myKeys = function() {
-
+Object.myKeys = function(object) {
+    const keys_ = []; //Empty array
+        for(const keys in object){ //for each keys_ in object
+            keys_.push(keys)// push keys_ to the list
+        }
+        return keys_;
 };
 
 // VALUES //
-Object.myValues = function() {
-
+Object.myValues = function(object) {
+    const valueArr = [];//Empty array
+        for(const valueArr in object){
+            valueArr.push(object[value])
+        }
+        return valueArr
 };
